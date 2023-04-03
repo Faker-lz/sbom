@@ -10,8 +10,11 @@ import {services as GI_ASSETS_NEO4J_SERVER} from '@antv/gi-assets-neo4j';
 import {services as GI_ASSETS_GRAPHSCOPE_SERVER} from '@antv/gi-assets-graphscope';
 import {services as GI_ASSETS_ADVANCE_SERVER} from '@antv/gi-assets-advance';
 import {services as GI_ASSETS_BASIC_SERVER} from '@antv/gi-assets-basic';
-import {  GI_PROJECT_CONFIG, SERVER_ENGINE_CONTEXT,THEME_VALUE,GI_LOCAL_DATA,GI_SCHEMA_DATA } from "./GI_EXPORT_FILES";
+// import {  GI_PROJECT_CONFIG, SERVER_ENGINE_CONTEXT,THEME_VALUE,GI_LOCAL_DATA,GI_SCHEMA_DATA } from "./GI_EXPORT_FILES";
+import {  GI_PROJECT_CONFIG, SERVER_ENGINE_CONTEXT,THEME_VALUE,GI_LOCAL_DATA,GI_SCHEMA_DATA } from "./CONGIF_EXPORT";
 import ThemeSwitch from '@antv/gi-theme-antd';
+import my_data from './apis/test_api';
+
 /** 资产可按需引入 **/
 const { ZoomIn,ZoomOut,FitView,FitCenter,LassoSelect,PropertiesPanel,ActivateRelations,CanvasSetting,NodeLegend,Placeholder,FilterPanel,ContextMenu,ToggleClusterWithMenu,NeighborsQuery,Copyright,Loading,PinNodeWithMenu,ForceSimulation,Initializer,LayoutSwitch,SideTabs,PathAnalysis,Toolbar,Export } = GI_ASSETS_BASIC.components;
 const { LargeGraph,MapMode } = GI_ASSETS_SCENE.components;
@@ -31,8 +34,7 @@ const SERVER = [
   GI_ASSETS_TUGRAPH_SERVER,GI_ASSETS_NEO4J_SERVER,GI_ASSETS_GRAPHSCOPE_SERVER,GI_ASSETS_ADVANCE_SERVER,GI_ASSETS_BASIC_SERVER
 ]
 
-
-
+console.log(my_data);
 
 const {  getCombineServices } = utils;
 //@ts-ignores
@@ -49,7 +51,6 @@ localforage.setItem(GI_SITE_PROJECT_ID,{
   data:{ transData:GI_LOCAL_DATA },
   schemaData:GI_SCHEMA_DATA
 });
-
 
 const App= () => {
 
