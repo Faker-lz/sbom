@@ -13,7 +13,9 @@ import {services as GI_ASSETS_BASIC_SERVER} from '@antv/gi-assets-basic';
 // import {  GI_PROJECT_CONFIG, SERVER_ENGINE_CONTEXT,THEME_VALUE,GI_LOCAL_DATA,GI_SCHEMA_DATA } from "./GI_EXPORT_FILES";
 import {  GI_PROJECT_CONFIG, SERVER_ENGINE_CONTEXT,THEME_VALUE,GI_LOCAL_DATA,GI_SCHEMA_DATA } from "./CONGIF_EXPORT";
 import ThemeSwitch from '@antv/gi-theme-antd';
-import my_data from './apis/test_api';
+import request from "./utils/request";
+import get_data from './apis/test_api';
+import {useState} from "react";
 
 /** 资产可按需引入 **/
 const { ZoomIn,ZoomOut,FitView,FitCenter,LassoSelect,PropertiesPanel,ActivateRelations,CanvasSetting,NodeLegend,Placeholder,FilterPanel,ContextMenu,ToggleClusterWithMenu,NeighborsQuery,Copyright,Loading,PinNodeWithMenu,ForceSimulation,Initializer,LayoutSwitch,SideTabs,PathAnalysis,Toolbar,Export } = GI_ASSETS_BASIC.components;
@@ -34,8 +36,6 @@ const SERVER = [
   GI_ASSETS_TUGRAPH_SERVER,GI_ASSETS_NEO4J_SERVER,GI_ASSETS_GRAPHSCOPE_SERVER,GI_ASSETS_ADVANCE_SERVER,GI_ASSETS_BASIC_SERVER
 ]
 
-console.log(my_data);
-
 const {  getCombineServices } = utils;
 //@ts-ignores
 const services = getCombineServices(SERVER);
@@ -45,31 +45,51 @@ window.localStorage.setItem( 'SERVER_ENGINE_CONTEXT', JSON.stringify(SERVER_ENGI
 window.localStorage.setItem("@theme", THEME_VALUE);
 /** 如果是本地上传的数据，需要将数据存储在IndexedDB中，避免数据量大导致的内存报错 **/
 const { GI_SITE_PROJECT_ID } = SERVER_ENGINE_CONTEXT;
-//@ts-ignore
+// @ts-ignore
 window.localforage = localforage; // 如果是GI引擎，在初始化的时候，查询的是window.localforage.getItem('GI_SITE_PROJECT_ID')，因此需要将localforage设置为全局变量
 localforage.setItem(GI_SITE_PROJECT_ID,{
-  data:{ transData:GI_LOCAL_DATA },
-  schemaData:GI_SCHEMA_DATA
+    data:{ transData:GI_LOCAL_DATA },
+    schemaData:GI_SCHEMA_DATA
 });
+
 
 const App= () => {
 
+    // const [count,setCount] = useState(GI_LOCAL_DATA)
+    // get_data().then((data)=>{
+    //         //@ts-ignore
+    //         console.warn(data);
+    //         console.warn('*********', GI_LOCAL_DATA);
+    //         //@ts-ignore
+    //         window.localforage = localforage; // 如果是GI引擎，在初始化的时候，查询的是window.localforage.getItem('GI_SITE_PROJECT_ID')，因此需要将localforage设置为全局变量
+    //         localforage.setItem(GI_SITE_PROJECT_ID,{
+    //             data:{ transData:GI_LOCAL_DATA },
+    //             schemaData:GI_SCHEMA_DATA
+    //             // data: my_data,
+    //             // schemaData: my_data
+    //         });
+    //         // @ts-ignore
+    //     // setCount(data);
+    //     }
+    // )
     return (
-      <div>
-        <div style={{ height: "100vh" }}>
-          <ThemeSwitch style={{ visibility: "hidden" }} />
-          <GISDK
-              id={"12346789"}
-              // @ts-ignore
-              config={GI_PROJECT_CONFIG}
-              // @ts-ignore
-              assets={ASSETS}
-              services={services}
-          />
+        <div>
+            <div style={{ height: "100vh" }}>
+                <ThemeSwitch style={{ visibility: "hidden" }} />
+                <GISDK
+                    id={"12346789"}
+                    // @ts-ignore
+                    config={GI_PROJECT_CONFIG}
+                    // @ts-ignore
+                    assets={ASSETS}
+                    services={services}
+                />
+            </div>
         </div>
-      </div>
-  );
+    );
 };
 
-
 export default App;
+
+
+

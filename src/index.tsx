@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import App from './learn/easy_graph'
 // import App from "./learn/defined_node"
-import App from "./learn/complicated_defined_node"
+// import App from "./learn/complicated_defined_node"
+// import App from "./component/easy_app"
 
 // const root = ReactDOM.createRoot(
 //   document.getElementById('root') as HTMLElement

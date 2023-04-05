@@ -1,13 +1,14 @@
 import request from "../utils/request";
-let my_data: any;
 
-request('/get_kg_data', 'get').then(
-    response=>{
-        my_data = response.data;
-        console.log(response);
-    },(err)=>{
-        console.log("错误")
-    }
-)
+const get_data = async() => {
+    return await request('/get_kg_data', 'get').then(
+        response => {
+            console.log(response.data);
+            return response.data;
+        }, (err) => {
+            console.log("错误")
+        }
+    )
+}
 
-export default my_data;
+export default get_data;
